@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>唐华星 - 前端工程师</title>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="assets/js/three.min.js"></script>
+    <script src="assets/js/particles.min.js"></script>
+    <style>
+      :root {
+        --primary-color: #e6e6fa;
+        --secondary-color: #9370db;
+        --accent-color: #7b68ee;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #f0e6ff, #e6e6fa);
+      }
+
+      /* 粒子背景容器 */
+      #particles-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      /* 头部样式 */
+      .header {
+        text-align: center;
+        padding: 120px 20px 80px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      /* 3D卡片效果 */
+      .card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 30px;
+        margin: 20px;
+        box-shadow: 0 10px 30px rgba(147, 112, 219, 0.2);
+        transition: transform 0.6s, box-shadow 0.3s;
+        transform-style: preserve-3d;
+      }
+
+      .card:hover {
+        transform: rotateY(10deg) rotateX(10deg) translateZ(20px);
+        box-shadow: 0 15px 40px rgba(147, 112, 219, 0.3);
+      }
+
+      /* 时间轴样式 */
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 50px auto;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background: var(--secondary-color);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="particles-canvas"></canvas>
+
+    <header class="header">
+      <h1 class="glitch" data-text="唐华星">唐华星</h1>
+      <p class="typewriter">前端工程师 | 技术爱好者 | 内容创作者</p>
+    </header>
+
+    <section class="card">
+      <h2><i class="fas fa-user"></i> 基本信息</h2>
+      <!-- 基本信息内容 -->
+    </section>
+
+    <section class="card">
+      <h2><i class="fas fa-code"></i> 技术优势</h2>
+      <ul>
+        <li>
+          熟悉常见的命令行操作（如文件管理、权限设置、网络调试命令等），能够理解基本的系统架构。
+        </li>
+        <li>掌握基本的 Windows 服务管理，如用户管理、权限设置、IIS 等。</li>
+        <li>
+          了解网络协议（如 TCP/IP、HTTP、DNS
+          等）的基本原理。理解路由和交换的基本概念。
+        </li>
+        <li>
+          熟悉常用的网络排错工具：ping、traceroute、netstat、telnet、curl 等。
+        </li>
+        <li>掌握 shell 脚本语言，熟悉 bash、awk 工具。</li>
+        <li>
+          了解一些常见的监控工具（如
+          Zabbix、Nagios、Prometheus）或云监控服务（如阿里云、AWS CloudWatch）。
+        </li>
+        <li>
+          熟悉 Git 的使用，掌握常见的命令（如 clone、commit、push、branch）。
+        </li>
+        <li>
+          熟悉日志管理和分析工具：logrotate、grep，并了解虚拟化基础（如
+          VMware、KVM）。
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><i class="fas fa-project-diagram"></i> 项目经历</h2>
+      <h3>Linux 服务器环境搭建与个人项目部署</h3>
+      <p><strong>项目开发者</strong> | 2024.08-2022.09</p>
+      <p>
+        在学习 Linux
+        系统的过程中，我基于云主机搭建了一个完整的服务器环境并成功部署了个人项目。项目中，我首先安装并配置了
+        CentOS 系统，使用 Nginx 作为 Web 服务器，部署了一个基于 HTML 和 CSS
+        的静态博客页面，同时绑定自定义域名并设置了 HTTPS 加密（使用 Let’s
+        Encrypt）。为了实现服务的长期稳定运行，我配置了服务开机自启，并通过
+        crontab 实现定期备份和日志清理。项目中还结合 Shell
+        脚本编写了服务器资源监控工具，自动输出 CPU
+        和内存使用情况。通过这个项目，我掌握了基本的 Linux
+        操作、服务部署、域名解析和日志管理，为后续运维学习打下了实践基础。
+      </p>
+
+      <h3>自动化备份与日志分析系统</h3>
+      <p><strong>运维</strong> | 2024.10-2024.11</p>
+      <p>
+        为了提升服务器运维的自动化水平，我设计并实现了一个自动化备份与日志分析系统。通过
+        Shell 脚本，定期对重要文件夹和数据库进行打包备份，利用 scp
+        将备份文件同步至远程服务器，同时结合 crontab
+        实现每日定时任务。针对服务器运行中产生的日志文件，我编写了日志分析脚本，能够统计
+        Nginx 的访问来源 IP 分布和 HTTP 状态码比例，快速定位 404 和 500
+        错误。进一步优化中，加入了资源使用率的监控功能，当内存或磁盘使用超出阈值时，脚本通过邮件发送报警信息。该项目展示了我在
+        Shell
+        脚本编写、日志分析和自动化运维方面的实践能力，强化了系统运维的效率和稳定性。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2><i class="fas fa-graduation-cap"></i> 教育经历</h2>
+      <p>
+        <strong>南京师范大学泰州学院</strong> | 本科 | 计算机科学与技术 |
+        2021-2025
+      </p>
+      <ul>
+        <li>在校自己经常写项目，最多逛 GitHub 和 git，网络冲浪爱好者。</li>
+        <li>
+          自学《深入理解计算机系统》和《算法4》、《大话设计模式》和其他经典书籍。
+        </li>
+        <li>
+          个人博客：<a
+            href="http://tanghuaxing.lovestoblog.com/"
+            target="_blank"
+            >http://tanghuaxing.lovestoblog.com/</a
+          >，CSDN 博主，总浏览量 7W+。
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><i class="fas fa-certificate"></i> 资格证书</h2>
+      <ul>
+        <li>驾驶证 A1</li>
+        <li>大学英语四级</li>
+        <li>计算机二级</li>
+        <li>健康证</li>
+      </ul>
+    </section>
+
+    <script src="assets/js/particles.min.js"></script>
+    <script>
+      // 更精致的粒子背景
+      document.addEventListener("DOMContentLoaded", () => {
+        // 粒子背景配置
+        particlesJS("particles-js", {
+          particles: {
+            number: {
+              value: 60,
+              density: {
+                enable: true,
+                value_area: 800,
+              },
+            },
+            color: {
+              value: "#9370db",
+            },
+            shape: {
+              type: "circle",
+              stroke: {
+                width: 0,
+                color: "#000000",
+              },
+              polygon: {
+                nb_sides: 5,
+              },
+            },
+            opacity: {
+              value: 0.5,
+              random: true,
+              anim: {
+                enable: true,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false,
+              },
+            },
+            size: {
+              value: 3,
+              random: true,
+              anim: {
+                enable: true,
+                speed: 2,
+                size_min: 0.1,
+                sync: false,
+              },
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#b399e6",
+              opacity: 0.3,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 1,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+              attract: {
+                enable: true,
+                rotateX: 600,
+                rotateY: 1200,
+              },
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: {
+                enable: true,
+                mode: "grab",
+              },
+              onclick: {
+                enable: true,
+                mode: "push",
+              },
+              resize: true,
+            },
+            modes: {
+              grab: {
+                distance: 140,
+                line_linked: {
+                  opacity: 0.8,
+                },
+              },
+              push: {
+                particles_nb: 4,
+              },
+            },
+          },
+          retina_detect: true,
+        });
+
+        // 打字机效果
+        const typewriterText = "前端工程师 | 技术爱好者 | 内容创作者";
+        const typewriterElement = document.querySelector(".typewriter");
+        let i = 0;
+
+        function typeWriter() {
+          if (i < typewriterText.length) {
+            typewriterElement.textContent += typewriterText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+          } else {
+            typewriterElement.classList.add("finished");
+          }
+        }
+
+        setTimeout(typeWriter, 500);
+
+        // 卡片浮动效果
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const angleX = (y - centerY) / 20;
+            const angleY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+            card.style.boxShadow = `0 15px 35px rgba(147, 112, 219, 0.3)`;
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform =
+              "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+            card.style.boxShadow = "0 8px 25px rgba(147, 112, 219, 0.15)";
+          });
+        });
+
+        // 滚动动画
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          }
+        );
+
+        document.querySelectorAll(".card, .timeline-item").forEach((el) => {
+          observer.observe(el);
+        });
+
+        // 响应式调整
+        function handleResize() {
+          if (window.innerWidth < 768) {
+            document.documentElement.style.setProperty("--max-width", "90%");
+          } else {
+            document.documentElement.style.setProperty("--max-width", "800px");
+          }
+        }
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+      });
+    </script>
+  </body>
+</html>
